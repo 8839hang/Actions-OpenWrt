@@ -26,6 +26,8 @@ env:
   CONFIG_FILE: .config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
+  UPLOAD_BIN_DIR: true
+  UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
 
 jobs:
@@ -87,7 +89,15 @@ jobs:
     - name: cp config
       run: |
         cd openwrt
+        mkdir bin
         cp /home/runner/work/Actions-OpenWrt/Actions-OpenWrt/openwrt/.config /home/runner/work/Actions-OpenWrt/Actions-OpenWrt/openwrt/bin/
+
+    - name: Upload bin directory
+      uses: actions/upload-artifact@main
+      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
+      with:
+        name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        path: openwrt/bin
 
     - name: Organize files
       id: organize
