@@ -20,7 +20,7 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/8839hang/immortalwrt-mt798
+  REPO_URL: https://github.com/Aes64X/immortalwrt-mt798
   REPO_BRANCH: openwrt-21.02
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
